@@ -1,0 +1,8 @@
+*.swp
+*.bak
+*.orig
+.DS_Store
+.sass-cache
+
+build/
+node_modules/
