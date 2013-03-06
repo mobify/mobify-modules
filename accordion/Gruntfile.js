@@ -10,6 +10,11 @@ module.exports = function(grunt) {
                             return {};
                         }
                     })(),
+        releaseName: '<%= pkg.name %>-<%= pkg.version %>',
+        releaseMessage: '<%= pkg.name %> release <%= pkg.version %>',
+        clean: {
+            buildProducts: "build/"
+        },
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -29,6 +34,16 @@ module.exports = function(grunt) {
                 dest: 'build/accordion-style.min.css'
             }
         },
+        shell: {
+            tagRelease: {
+                command: 'git tag -a <%= releaseName %> -m "<%= releaseMessage %>" &&' +
+                  'git push origin <%= releaseName %>'
+            }
+        },
+        zip: {
+            "build/accordion.zip": ["src/accordion.js", "src/accordion.css", 
+            "src/accordion-style.css"]
+        },
         s3: {
             key: '<%= localConfig.aws.key %>',
             secret: '<%= localConfig.aws.secret %>',
@@ -38,7 +53,7 @@ module.exports = function(grunt) {
             upload: [
                 { // build
                     src: "build/*",
-                    dest: "modules/accordion/<%= pkg.version %>/",
+                    dest: "modules-testing/accordion/<%= pkg.version %>/",
                     rel: "build"
                 }
             ]
@@ -46,11 +61,17 @@ module.exports = function(grunt) {
         // TODO: upload over a LATEST version and/or create a redirect?
     });
 
-    // Load the plugin that provides the "uglify" task.
+    // Load the task plugins
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-css');
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-zip');
+    grunt.loadNpmTasks('grunt-s3');
+    grunt.loadNpmTasks('grunt-clean');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('build', ['uglify', 'cssmin', 'zip']);
+    grunt.registerTask('release', ['build', 'shell:tagRelease', 's3'])
+    grunt.registerTask('default', 'build')
 
 };
