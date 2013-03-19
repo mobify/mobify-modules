@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Mobify's Pikabu - a simple off-canvas flyout framework</title>
+		
+		<!-- include pikabu.css -->
+		<link rel="stylesheet" href="pikabu.css">
+		<link rel="stylesheet" href="pikabu-theme.css">
+	</head>
+	<body>
+		<!-- the viewport -->
+		<div class="m-pikabu-viewport">
+            <!-- the left sidebar -->
+            <div class="m-pikabu-sidebar m-pikabu-left">
+                <!-- left sidebar content -->
+            </div>
+			<!-- the main page content -->
+			<div class="m-pikabu-container">
+				<!-- Overlay is needed to have a big click area to close the sidebars -->
+				<div class="m-pikabu-overlay"></div>
+				<header>
+					<a class="m-pikabu-nav-toggle" data-role="left">Left Menu</a>
+					<h1>Pikabu</h1>
+					<a class="m-pikabu-nav-toggle" data-role="right">Right Menu</a>
+				</header>
+				<section>
+					<!-- Body content goes in here -->
+				</section>
+			</div>
+			<!-- the right sidebar -->
+            <div class="m-pikabu-sidebar m-pikabu-right">
+                <!-- right sidebar content -->
+            </div>
+		</div>
+
+		<!-- include zepto.js or jquery.js -->
+		<script src="//zeptojs.com/zepto.min.js"></script>
+		<!-- include pikabu.js -->
+		<script src="pikabu.min.js"></script>
+		<!-- construct the flyout -->
+		<script>
+            $(document).ready(function() {
+                flyout = new Flyout;
+                flyout.init();
+            });
+
+            $(window).on('orientationchange', function(e) {
+                flyout.recalculateSidebarHeight($(window).height());
+            });
+        </script>
+	</body>
+</html>

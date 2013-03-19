@@ -1,0 +1,149 @@
+@charset "UTF-8";
+@import "compass";
+
+// Theme styles
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: bold;
+    font-weight: 700;
+    src: local('Roboto Bold'), local('Roboto-Bold'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'entypo';
+    font-style: 'normal';
+    font-weight: 'normal';
+    src: url('http://weloveiconfonts.com/api/fonts/entypo/entypo.eot');
+    src: url('http://weloveiconfonts.com/api/fonts/entypo/entypo.eot?#iefix') format('eot'), 
+    url('http://weloveiconfonts.com/api/fonts/entypo/entypo.woff') format('woff'), 
+    url('http://weloveiconfonts.com/api/fonts/entypo/entypo.ttf') format('truetype'), 
+    url('http://weloveiconfonts.com/api/fonts/entypo/entypo.svg#entypo') format('svg');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background: #f6f1e4;
+    
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+header {
+    overflow: hidden;
+    
+    background: #6fbb60;
+    text-align: center;
+}
+
+header h1 {
+    display: inline-block;
+    margin: 0;
+    
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #f6f1e4;
+    
+    @include text-shadow(1px 1px 0 #896e7c);
+}
+
+.m-pikabu-nav-toggle {
+    position: relative;
+    float: left;
+    
+    display: block;
+    width: 40px;
+    height: 40px;
+    
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    
+    color: #f6f1e4;
+    
+    &[data-role="right"] {
+        float: right;
+    }
+        
+    &::after {
+        content: '☰';
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        display: block;
+        width: 100%;
+        height: 100%;
+        
+        font-family: 'entypo', sans-serif;
+        text-align: center;
+        line-height: 40px;
+        text-indent: 0;
+        font-size: 25px;
+        font-weight: bold;
+        color: inherit;
+    
+        @include text-shadow(1px 1px 0 #896e7c);
+    }
+    
+    .left-visible &[data-role="left"],
+    .right-visible &[data-role="right"] {
+        color: #e6c01a;
+    }
+}
+
+section {
+    padding: 20px;
+}
+
+.sidebar {
+    background: #5d3e44;
+}
+
+section h2 {
+    display: block;
+    margin: -20px -20px 16px;
+    padding: 20px;
+        
+    background: rgba(#896e7c, 0.15);
+    
+    font-size: 24px;
+    line-height: 1.4;
+    color: #896e7c;
+}
+
+section p {
+    margin-bottom: 15px;
+    
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+section a {
+    color: #5d3e44;
+    &:hover {
+        color: #A895B0;
+        @include transition(color 0.1s linear);
+    }
+}
+
+section ul {
+    margin: 15px 0;
+}
