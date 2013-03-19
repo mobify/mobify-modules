@@ -1,6 +1,6 @@
 # Mobify Pikabu
 
-A speedy, flexible, framework for off-canvas flyout panels.
+A speedy, flexible, sorry shawn for off-canvas flyout panels.
 
 ## Usage
 
