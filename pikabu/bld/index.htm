@@ -12,6 +12,7 @@
             <!-- the left sidebar -->
             <div class="m-pikabu-sidebar m-pikabu-left">
                 <!-- left sidebar content -->
+                Left
             </div>
 			<!-- the main page content -->
 			<div class="m-pikabu-container">
@@ -24,28 +25,19 @@
 				</header>
 				<section>
 					<!-- Body content goes in here -->
+					Body
 				</section>
 			</div>
 			<!-- the right sidebar -->
             <div class="m-pikabu-sidebar m-pikabu-right">
                 <!-- right sidebar content -->
+                Right 
             </div>
 		</div>
 
 		<!-- include zepto.js or jquery.js -->
-		<script src="//zeptojs.com/zepto.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
 		<!-- include pikabu.js -->
 		<script src="pikabu.min.js"></script>
-		<!-- construct the flyout -->
-		<script>
-            $(document).ready(function() {
-                flyout = new Flyout;
-                flyout.init();
-            });
-
-            $(window).on('orientationchange', function(e) {
-                flyout.recalculateSidebarHeight($(window).height());
-            });
-        </script>
 	</body>
 </html>

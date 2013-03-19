@@ -1,5 +1,5 @@
-window.Flyout = (function() {
-    var flyout = {};
+window.Pikabu = (function() {
+    var pikabu = {};
     var $document = $('html');
 
     // Do we have overflow scrolling?
@@ -40,7 +40,7 @@ window.Flyout = (function() {
         return hasIt;
     }
 
-    flyout.init = function () {
+    pikabu.init = function () {
         // check if we have overflow scrolling or not
         if (hasOverflowScrolling()) {
             $document.addClass('m-pikabu-overflow-scrolling');
@@ -51,19 +51,19 @@ window.Flyout = (function() {
         $('.m-pikabu-nav-toggle').click(function(e) {
           e.stopPropagation();
           
-          flyout.showSidebar($(this).attr('data-role'));
+          pikabu.showSidebar($(this).attr('data-role'));
         });
 
         // Overlay: stop clicks, close the sidebars and slide back to main content
         $('.m-pikabu-overlay').click(function(e) {
             e.stopPropagation();
 
-            flyout.closeSidebars();
+            pikabu.closeSidebars();
         });
     };
     
     // Sidebar
-    flyout.showSidebar = function(type) {   
+    pikabu.showSidebar = function(type) {   
         $('.m-pikabu-sidebar').addClass('m-pikabu-overflow-touch');
 
         if (type == 'left' || type == 'right') {
@@ -74,7 +74,7 @@ window.Flyout = (function() {
         }
     };
 
-    flyout.closeSidebars = function() {
+    pikabu.closeSidebars = function() {
         $document.removeClass('m-pikabu-left-visible m-pikabu-right-visible');
         $('.m-pikabu-viewport, .m-pikabu-container').css('height', 'auto');
         $('.m-pikabu-viewport').css('width', 'auto');
@@ -86,7 +86,7 @@ window.Flyout = (function() {
         },250); 
     };
 
-    flyout.recalculateSidebarHeight = function(viewportHeight) {
+    pikabu.recalculateSidebarHeight = function(viewportHeight) {
         var $viewport = $('.m-pikabu-viewport');
         $viewport.width($(window).width());
 
@@ -133,5 +133,14 @@ window.Flyout = (function() {
         }
     };
 
-    return flyout;
+    return pikabu;
+});
+
+$(document).ready(function() {
+    pikabu = new Pikabu;
+    pikabu.init();
+});
+
+$(window).on('orientationchange', function(e) {
+    pikabu.recalculateSidebarHeight($(window).height());
 });
