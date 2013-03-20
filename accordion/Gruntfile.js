@@ -53,7 +53,7 @@ module.exports = function(grunt) {
             upload: [
                 { // build
                     src: "build/*",
-                    dest: "modules-testing/accordion/<%= pkg.version %>/",
+                    dest: "modules/accordion/<%= pkg.version %>/",
                     rel: "build"
                 }
             ]

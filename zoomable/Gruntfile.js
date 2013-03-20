@@ -42,7 +42,7 @@ module.exports = function(grunt) {
             upload: [
                 { // build
                     src: "build/*",
-                    dest: "modules-testing/zoomable/<%= pkg.version %>/",
+                    dest: "modules/zoomable/<%= pkg.version %>/",
                     rel: "build"
                 }
             ]

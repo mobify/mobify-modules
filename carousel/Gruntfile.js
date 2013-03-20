@@ -53,7 +53,7 @@ module.exports = function(grunt) {
             upload: [
                 { // build
                     src: "build/*",
-                    dest: "modules-testing/carousel/<%= pkg.version %>/",
+                    dest: "modules/carousel/<%= pkg.version %>/",
                     rel: "build"
                 }
             ]
