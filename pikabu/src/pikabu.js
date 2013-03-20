@@ -40,10 +40,45 @@ window.Pikabu = (function() {
         return hasIt;
     }
 
+    function isLegacyAndroid() {
+        var android = /Android\s+([\d\.]+)/.exec(window.navigator.userAgent);
+
+        if (android && android.length > 0 && (parseInt(android[1]) < 3)) {
+            // we are on Android 2.x
+            return true;
+        }
+
+        return false;
+    }
+
+    /* @url: http://stackoverflow.com/questions/7264899/detect-css-transitions-using-javascript-and-without-modernizr */
+    function supportsTransitions() {
+        var b = document.body || document.documentElement;
+        var s = b.style;
+        var p = 'transition';
+        if(typeof s[p] == 'string') {return true; }
+
+        // Tests for vendor specific prop
+        v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
+        p = p.charAt(0).toUpperCase() + p.substr(1);
+        for(var i=0; i<v.length; i++) {
+          if(typeof s[v[i] + p] == 'string') { return true; }
+        }
+        return false;
+    }
+
     pikabu.init = function () {
         // check if we have overflow scrolling or not
         if (hasOverflowScrolling()) {
             $document.addClass('m-pikabu-overflow-scrolling');
+        }
+
+        if (isLegacyAndroid()) {
+            $document.addClass('m-pikabu-legacy-android');
+        }
+
+        if (supportsTransitions()) {
+            $document.addClass('m-pikabu-transitions');
         }
 
         // Bind handlers
