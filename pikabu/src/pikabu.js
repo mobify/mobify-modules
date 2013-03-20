@@ -111,14 +111,18 @@ window.Pikabu = (function() {
 
     pikabu.closeSidebars = function() {
         $document.removeClass('m-pikabu-left-visible m-pikabu-right-visible');
-        $('.m-pikabu-viewport, .m-pikabu-container').css('height', 'auto');
+        $('.m-pikabu-viewport, .m-pikabu-container').css('height', '');
+        $('.m-pikabu-container').css('marginTop', 1); // add this arbitrary margin-top to force a reflow when we remove it
         $('.m-pikabu-viewport').css('width', 'auto');
+
         window.scrollTo(0, 1);
       
       // Removing overflow-scrolling-touch causes a content flash so we do it after the sidebar has closed
         setTimeout(function() {
            $('.m-pikabu-sidebar').removeClass('m-pikabu-overflow-touch');
         },250); 
+
+        $('.m-pikabu-container').css('marginTop', ''); // remove the unnecessary margin-top to force reflow and properly recalculate the height of this container
     };
 
     pikabu.recalculateSidebarHeight = function(viewportHeight) {

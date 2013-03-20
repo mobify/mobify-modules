@@ -25,7 +25,96 @@
 				</header>
 				<section>
 					<!-- Body content goes in here -->
-					Body
+					Skip to content. | Skip to navigation
+Personal tools
+Log in
+Search Site
+  
+ only in current section
+Advanced Search…
+
+Sections
+HomeNewsEventsUsersAnderson Leeb Blog
+You are here: Home / Anderson Leeb Blog / Changing git remote origin
+Changing git remote origin
+Midway through development we decided to switch from private shared accounts to a corporate account. Switching local repos couldn't be easier:
+
+git remote rm origin  #Removes old origin
+git remote add origin https://username@bitbucket.org/your.new.repo  #Adds new origin pointing to BitBucket
+git push -u origin  #Pushes commits to new repo
+The first git pull needs the repo:
+
+git pull https://username@bitbucket.org/andersonleeb/new.repo.git
+But there is one more step, in my case at least: the .git/config file was missing the [branch "master"] section, so I kept getting the following error when trying to git pull:
+
+You asked me to pull without telling me which branch you
+want to merge with, and 'branch.master.merge' in
+your configuration file does not tell me, either. Please
+specify which branch you want to use on the command line and
+try again (e.g. 'git pull <repository> <refspec>').
+
+See git-pull(1) for details.
+
+If you often merge with the same branch, you may want to
+use something like the following in your configuration file:
+[branch "master"]
+remote = <nickname>
+merge = <remote-ref>
+
+[remote "<nickname>"]
+url = <url>
+fetch = <refspec>
+
+See git-config(1) for details.
+To fix this, I just added:
+
+ [branch "master"]
+   remote = origin
+   merge = refs/heads/master
+Navigation
+Moving SVN to Bitbucket
+Changing git remote origin
+Deleting objects that refuse to be deleted
+Login at the Zope debug prompt
+Delete objects by path at the Zope debug prompt
+Manually update getpaid orders
+Override status message in zope.formlib form
+Skin layer order matters
+plone.app.theming in 5 minutes
+Sea Sprint Blog
+Create objects in the Plone debugger
+Compound Conditionals in Diazo
+Use built in theme parameters in Diazo rules
+Configuring Dovecot and Postfix for virtual hosting
+See managePortletsFallback without the proper viewlet manager
+News
+See managePortletsFallback without the proper viewlet manager
+Feb 08, 2013
+Configuring Dovecot and Postfix for virtual hosting
+Jan 26, 2013
+Use built in theme parameters in Diazo rules
+Dec 14, 2012
+Compound Conditionals in Diazo
+Dec 12, 2012
+Create objects in the Plone debugger
+Nov 19, 2012
+More news…
+Twitter Feed
+AndersonLeebInc: cpa-wordpress - areinhardt - Updated transient functions
+Mar 19, 2013
+AndersonLeebInc: cpa-wordpress - areinhardt - Patch - Showing ROS logo on all performances page
+Mar 19, 2013
+AndersonLeebInc: cpa-wordpress - areinhardt - Patch - showing ROS logo on all performances page
+Mar 19, 2013
+AndersonLeebInc: cpa-wordpress - areinhardt - Revert "debugging" This reverts commit 439029279c32cec0d47a0b6dc05e0e34c9b74e2d.
+Mar 18, 2013
+AndersonLeebInc: cpa-wordpress - areinhardt - debugging
+Mar 18, 2013
+Twitter Feed -
+More…
+The Plone® Open Source CMS/WCM is © 2000-2013 by the Plone Foundation and friends. Distributed under the GNU GPL license.
+Powered by Plone & Python
+Site Map Accessibility Contact
 				</section>
 			</div>
 			<!-- the right sidebar -->
@@ -38,6 +127,7 @@
 		<!-- include zepto.js or jquery.js -->
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
 		<!-- include pikabu.js -->
-		<script type="text/javascript" src="pikabu.min.js"></script>
+		<!--<script type="text/javascript" src="pikabu.min.js"></script>-->
+		<script type="text/javascript" src="../src/pikabu.js"></script>
 	</body>
 </html>
