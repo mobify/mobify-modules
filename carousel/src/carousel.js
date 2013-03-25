@@ -1,6 +1,6 @@
 var Mobify = window.Mobify = window.Mobify || {};
 Mobify.$ = Mobify.$ || window.Zepto || window.jQuery;
-Mobify.UI = Mobify.UI || { classPrefix: 'm-' };
+Mobify.UI = Mobify.UI ? Mobify.$.extend(Mobify.UI, { classPrefix: 'm-' }) : { classPrefix: 'm-' };
 
 (function($, document) {
     $.support = $.support || {};
