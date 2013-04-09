@@ -282,9 +282,24 @@ Mobify.UI.Carousel = (function($, Utils) {
             dx = xy.x - newXY.x;
             dy = xy.y - newXY.y;
 
+            /* Android 3.x and 4.0 (but not 4.1) sends only one touchmove event to the browser.
+             * If that touchmove is NOT cancelled, browser stops sending subsequent move events.
+             * It is hard to explain why this happens... perhaps they see cancelling as sign of
+             * "I will handle it" and non-cancelling as "just use native scrolling behavior", and
+             * would like to speed up scrolling by not having to run event processing for every
+             * user finger twitch. http://code.google.com/p/android/issues/detail?id=19827
+             * To us, the consequence is that we can't wait with cancelling the event. We must
+             * make a decision on whether to lock scrolling to slideshow or let all document
+             * be affected upon FIRST touchmove. If we fail to take over control of touchmove
+             * event with e.preventDefault(), we will not receive any more touchmoves.
+             */
+            if (abs(dx) > abs(dy)) {
+                e.preventDefault();
+            }
+
             if (dragThresholdMet || abs(dx) > abs(dy) && (abs(dx) > dragRadius)) {
                 dragThresholdMet = true;
-                e.preventDefault();
+                // e.preventDefault();
                 
                 if (lockLeft && (dx < 0)) {
                     dx = dx * (-dragLimit)/(dx - dragLimit);
