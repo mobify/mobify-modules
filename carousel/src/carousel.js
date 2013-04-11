@@ -131,6 +131,7 @@ Mobify.UI.Carousel = (function($, Utils) {
               , touch: 'has-touch'
               , dragging: 'dragging'
               , active: 'active'
+              , fluid: 'fluid'
             }
         }
        , has = $.support;
@@ -161,7 +162,7 @@ Mobify.UI.Carousel = (function($, Utils) {
     };
 
     Carousel.prototype.initElements = function(element) {
-        this._index = 1;
+        this._index = 1;  // 1-based index
         
         this.element = element;
         this.$element = $(element);
@@ -170,15 +171,15 @@ Mobify.UI.Carousel = (function($, Utils) {
         
         this.$start = this.$items.eq(0);
         this.$sec = this.$items.eq(1);
-        this.$current = this.$items.eq(this._index);
+        this.$current = this.$items.eq(this._index - 1);  // convert to 0-based index
 
         this._length = this.$items.length;
         this._alignment = this.$element.hasClass(this._getClass('center')) ? 0.5 : 0;
 
+        this._isFluid = this.$element.hasClass(this._getClass('fluid'));
     };
 
     Carousel.prototype.initOffsets = function() {
-        this._offset = 0;
         this._offsetDrag = 0;
     }
 
@@ -233,7 +234,11 @@ Mobify.UI.Carousel = (function($, Utils) {
             return;
         }
 
-        var x = Math.round(this._offset + this._offsetDrag);
+        var $current = this.$current
+          , $start = this.$start
+          , currentOffset = $current.prop('offsetLeft') + $current.prop('clientWidth') * this._alignment
+          , startOffset = $start.prop('offsetLeft') + $start.prop('clientWidth') * this._alignment
+          , x = Math.round(-(currentOffset - startOffset) + this._offsetDrag);
 
         Utils.translateX(this.$inner[0], x);
 
@@ -253,7 +258,6 @@ Mobify.UI.Carousel = (function($, Utils) {
             , $element = this.$element
             , $inner = this.$inner
             , opts = this.options
-            , dragLimit = this.$element.width()
             , lockLeft = false
             , lockRight = false;
 
@@ -278,7 +282,8 @@ Mobify.UI.Carousel = (function($, Utils) {
         function drag(e) {
             if (!dragging || canceled) return;
 
-            var newXY = Utils.getCursorPosition(e);
+            var newXY = Utils.getCursorPosition(e)
+              , dragLimit = self.$element.width();
             dx = xy.x - newXY.x;
             dy = xy.y - newXY.y;
 
@@ -353,6 +358,14 @@ Mobify.UI.Carousel = (function($, Utils) {
             self.$element.find('[data-slide=\'' + nextSlide + '\']').addClass(self._getClass('active'));
         });
 
+        $(window).on('resize orientationchange', function(e) {
+            // Disable animation for now to avoid seeing 
+            // the carousel sliding, as it updates its position.
+            // Animation will be enabled automatically when you're swiping.
+            self._disableAnimation();
+            
+            self.update();
+        });
 
         $element.trigger('beforeSlide', [1, 1]);
         $element.trigger('afterSlide', [1, 1]);
@@ -407,12 +420,6 @@ Mobify.UI.Carousel = (function($, Utils) {
         // Index must be decremented to convert between 1- and 0-based indexing.
         this.$current = $current = $items.eq(newIndex - 1);
 
-        var currentOffset = $current.prop('offsetLeft') + $current.prop('clientWidth') * this._alignment
-            , startOffset = $start.prop('offsetLeft') + $start.prop('clientWidth') * this._alignment
-
-        var transitionOffset = -(currentOffset - startOffset);
-
-        this._offset = transitionOffset;
         this._offsetDrag = 0;
         this._index = newIndex;
         this.update();
