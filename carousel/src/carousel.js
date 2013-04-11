@@ -299,7 +299,6 @@ Mobify.UI.Carousel = (function($, Utils) {
 
             if (dragThresholdMet || abs(dx) > abs(dy) && (abs(dx) > dragRadius)) {
                 dragThresholdMet = true;
-                // e.preventDefault();
                 
                 if (lockLeft && (dx < 0)) {
                     dx = dx * (-dragLimit)/(dx - dragLimit);
