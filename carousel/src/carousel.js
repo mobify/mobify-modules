@@ -18,7 +18,8 @@ Mobify.UI = Mobify.UI ? Mobify.$.extend(Mobify.UI, { classPrefix: 'm-' }) : { cl
 */
 Mobify.UI.Utils = (function($) {
     var exports = {}
-        , has = $.support;
+        , has = $.support
+        , ua = navigator.userAgent;
 
     /**
         Events (either touch or mouse)
@@ -59,7 +60,7 @@ Mobify.UI.Utils = (function($) {
 
     $.extend(has, {
         'transform': !! (exports.getProperty('Transform'))
-      , 'transform3d': !! (window.WebKitCSSMatrix && 'm11' in new WebKitCSSMatrix()) 
+      , 'transform3d': !! (window.WebKitCSSMatrix && 'm11' in new WebKitCSSMatrix() && !/android/i.test(ua)) 
     });
 
     // translateX(element, delta)
