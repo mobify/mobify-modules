@@ -65,29 +65,29 @@ Unbinds the events from the zoomable context, and removes it from the DOM.
 Below are the options available in the configuration object:
 
 | Name          | Default        | Description                               |   
-|---------------|------------------------------------------------------------|
+|---------------|----------------|-------------------------------------------|
 | classPrefix   | `"m-"`         |This prefix is inserted before all class references for conflict avoidance. For example, default close class will be `m-close`. |
 | stage         | <body> element | DOM node that will receive generated zoomable markup. |
 | classNames    | Object, see below | Contains class names for various parts of zoomable. Classes can be overriden individually. |
 | ratio         | `2`            | Zoomed in image is magified to be `ratio` times bigger than the stage. |
-| seekImage     | `true`         | If thumbnail image is not found in the anchor element used as context, Zoomable will go up in DOM tree until it finds nearby image. Set to `false` to restrict image lookups to stay within context 
+| seekImage     | `true`         | If thumbnail image is not found in the anchor element used as context, Zoomable will go up in DOM tree until it finds nearby image. Set to `false` to restrict image lookups to stay within context |
 | clickCloses   | `true`         | Specifies if clicking or tapping in place on the magnified image should close magnified view |
 | activationEvent | `"click"` | Override to use alternate event for all zoomable control interactions |
 | canvasStyle  | Object, see below | Extra CSS properties to be applied to canvas. You can delete default properties by setting their value to `undefined`. | 
 | imageStyle   | Object, see below | Extra CSS properties to be applied to low-res and high-res magnified image. You can delete default properties by setting their value to `undefined`. |
 | stageHTML | Function | Generates HTML of magnified state of zoomable module. See examples to see how to change it |
-| globalStyle | Function | Generates CSS for zoomable acting upon <body>. Typically should be left as-is.
+| globalStyle | Function | Generates CSS for zoomable acting upon <body>. Typically should be left as-is. |
 
 ## Classes
 
-| Name        | Class       | Description                                                                                       |           
-|-------------|---------------------------------------------------------------------------------------------------|
-| zooming| m-`zooming` | Applied to stage (usually body element) when zoomable is active |
-| close| m-`close` | Should be added to custom close buttons within zoomable markup |
-| control| m-`zoomableControl` | Internal, added to all top-level elements injected by zoomable |
-| canvas| m-`zoomableCanvas` | Applied to div wrapper that contains both low and high resolution images |
-| thumb| m-`zoomableThumb` | Applied to low resolution (thumbnail) image |
-| full| m-`zoomableFull` | Applied to high resolution image |
+| Name        | Class       | Description                                                                         |           
+|-------------|-------------|-------------------------------------------------------------------------------------|
+| zooming | m-`zooming` | Applied to stage (usually body element) when zoomable is active |
+| close | m-`close` | Should be added to custom close buttons within zoomable markup |
+| control | m-`zoomableControl` | Internal, added to all top-level elements injected by zoomable |
+| canvas | m-`zoomableCanvas` | Applied to div wrapper that contains both low and high resolution images |
+| thumb | m-`zoomableThumb` | Applied to low resolution (thumbnail) image |
+| full | m-`zoomableFull` | Applied to high resolution image |
 
 ## Default styles
 
