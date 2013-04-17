@@ -413,6 +413,9 @@ Mobify.UI.Carousel = (function($, Utils) {
             //return; // Return Type?
         }
 
+        // Making sure that animation is enabled before moving
+        this._enableAnimation();
+
         // Trigger beforeSlide event
         $element.trigger('beforeSlide', [index, newIndex]);
 
