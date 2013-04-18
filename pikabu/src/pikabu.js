@@ -105,7 +105,7 @@ window.Pikabu = (function() {
             $document.toggleClass('m-pikabu-' + type + '-visible');
 
             this.recalculateSidebarHeight($(window).height());
-            window.scrollTo(0, 1);
+            window.scrollTo(0, 0);
         }
     };
 
