@@ -1,28 +1,9 @@
 @charset "UTF-8";
 @import "compass";
 
-// Theme styles
-
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Roboto';
-    font-style: bold;
-    font-weight: 700;
-    src: local('Roboto Bold'), local('Roboto-Bold'), url(http://themes.googleusercontent.com/static/fonts/roboto/v7/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
-}
+// ==========================================================================
+// FONTS
+// ==========================================================================
 
 @font-face {
     font-family: 'entypo';
@@ -35,20 +16,54 @@
     url('http://weloveiconfonts.com/api/fonts/entypo/entypo.svg#entypo') format('svg');
 }
 
+
+// ==========================================================================
+// COLOURS
+// ==========================================================================
+
+    // NEUTRAL COLOURS
+    $gray: #6b645c;
+    $light: #e6e6dd;
+
+
+    // BRAND
+    $brand: #e64a33;
+
+    $accent: #fee65e;
+    $dark-accent: #ffaa42;
+    $light-accent: #fdef6e;
+
+    $background: #fcfdf4;
+
+// ==========================================================================
+// MARGINS + TEXT
+// ==========================================================================
+
+    $margin: 10px;
+
+
+// ==========================================================================
+// GENERAL
+// ==========================================================================
+
 body {
     margin: 0;
     padding: 0;
 
-    background: #f6f1e4;
-    
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: $background;
+
+    color: $gray;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 header {
     overflow: hidden;
     
-    background: #6fbb60;
+    background: $accent;
+    border-bottom:solid 2px $dark-accent;
+
     text-align: center;
+    @include text-shadow(1px 1px 0 $background);
 }
 
 header h1 {
@@ -58,10 +73,14 @@ header h1 {
     font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-size: 22px;
     font-weight: bold;
-    line-height: 40px;
-    color: #f6f1e4;
-    
-    @include text-shadow(1px 1px 0 #896e7c);
+    line-height: 50px;
+    color: $brand;
+
+    &::before {
+        content: "\26a1";
+        margin-right: $margin*1.5;
+        font-family: 'entypo', sans-serif;
+    }
 }
 
 .m-pikabu-nav-toggle {
@@ -69,14 +88,20 @@ header h1 {
     float: left;
     
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 30px;
+    margin: $margin;
+
+    background: $light-accent;
+    border: solid 1px rgba($brand, .35);
+    @include border-radius(3px);
+    @include box-shadow(inset 0 1px 0 $background);
     
     text-indent: 100%;
     white-space: nowrap;
-    overflow: hidden;
     
-    color: #f6f1e4;
+    color: $brand;
+    line-height: 29px;
     
     &[data-role="right"] {
         float: right;
@@ -94,52 +119,72 @@ header h1 {
         
         font-family: 'entypo', sans-serif;
         text-align: center;
-        line-height: 40px;
         text-indent: 0;
         font-size: 25px;
         font-weight: bold;
         color: inherit;
-    
-        @include text-shadow(1px 1px 0 #896e7c);
+    }
+
+    &[data-role="right"]::after {
+        content: "\e705";
+         font-size: 17px;
     }
     
-    .left-visible &[data-role="left"],
-    .right-visible &[data-role="right"] {
-        color: #e6c01a;
+    .m-pikabu-left-visible &[data-role="left"],
+    .m-pikabu-right-visible &[data-role="right"] {
+        background: rgba(black,.1);
+        @include box-shadow(inset 0 1px 0 rgba(black,.1));
     }
 }
 
 section {
-    padding: 20px;
+    padding: $margin*2;
 }
 
 .sidebar {
-    background: #5d3e44;
+    background: $gray;
 }
 
 section h2 {
     display: block;
-    margin: -20px -20px 16px;
-    padding: 20px;
-        
-    background: rgba(#896e7c, 0.15);
+    margin:0;
     
-    font-size: 24px;
+    color: $brand;    
+    font-size: 21px;
+    font-weight: 300;
     line-height: 1.4;
-    color: #896e7c;
+    
+}
+
+section h3 {
+    display: block;
+    margin: $margin*2 (-$margin*2) $margin;
+    padding: $margin/2 $margin*2 $margin/2+2;
+
+    background: $brand;
+    border-bottom: solid 2px $light;
+    
+    color: $background;
+    font-size: 18px;
+    font-weight: normal;
 }
 
 section p {
-    margin-bottom: 15px;
+    margin-bottom: $margin*1.5;
     
     font-size: 16px;
     line-height: 1.4;
 }
 
+section p em {
+    color: $brand;
+    font-style: normal;
+}
+
 section a {
-    color: #5d3e44;
+    color: $brand;
     &:hover {
-        color: #A895B0;
+        color: black;
         @include transition(color 0.1s linear);
     }
 }
