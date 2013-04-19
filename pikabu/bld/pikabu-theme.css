@@ -105,10 +105,12 @@ section {
 
 /* line 144, ../src/sass/pikabu-theme.scss */
 .m-pikabu-sidebar {
+  padding: 10px;
   background: #6b645c;
+  color: white;
 }
 
-/* line 148, ../src/sass/pikabu-theme.scss */
+/* line 150, ../src/sass/pikabu-theme.scss */
 section h2 {
   display: block;
   margin: 0;
@@ -118,7 +120,7 @@ section h2 {
   line-height: 1.4;
 }
 
-/* line 159, ../src/sass/pikabu-theme.scss */
+/* line 161, ../src/sass/pikabu-theme.scss */
 section h3 {
   display: block;
   margin: 20px -20px 10px;
@@ -130,24 +132,24 @@ section h3 {
   font-weight: normal;
 }
 
-/* line 172, ../src/sass/pikabu-theme.scss */
+/* line 174, ../src/sass/pikabu-theme.scss */
 section p {
   margin-bottom: 15px;
   font-size: 16px;
   line-height: 1.4;
 }
 
-/* line 179, ../src/sass/pikabu-theme.scss */
+/* line 181, ../src/sass/pikabu-theme.scss */
 section p em {
   color: #e64a33;
   font-style: normal;
 }
 
-/* line 184, ../src/sass/pikabu-theme.scss */
+/* line 186, ../src/sass/pikabu-theme.scss */
 section a {
   color: #e64a33;
 }
-/* line 186, ../src/sass/pikabu-theme.scss */
+/* line 188, ../src/sass/pikabu-theme.scss */
 section a:hover {
   color: black;
   -webkit-transition: color 0.1s linear;
@@ -156,7 +158,7 @@ section a:hover {
   transition: color 0.1s linear;
 }
 
-/* line 192, ../src/sass/pikabu-theme.scss */
+/* line 194, ../src/sass/pikabu-theme.scss */
 section ul {
   margin: 15px 0;
 }
