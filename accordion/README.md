@@ -52,33 +52,110 @@ A mobile-first accordion module for progressive disclosure on the web.
     <!-- include accordion.js -->
     <script src="accordion.js"></script>
     <!-- construct the accordion -->
-    <script>$('.m-accordion').accordion()</script>
+    <script>$('.m-accordion').accordion();
+    </script>
 
 ## Methods
 
-### .accordion(options)
+### accordion()
 
 Initializes the accordion.
 
     $('.m-accordion').accordion();
 
-### .accordion('unbind')
+### accordion(options)
+
+Initialize with options.
+
+    $('.m-accordion').accordion({
+      {
+        ...
+        options (refer below)
+        ...
+      }
+    });
+
+### Storing accordion object for future use
+
+    var $accordion = $(".m-accordion"); // A Zepto element array is returned
+    var accordion = $accordion[0].accordion; // We access the appropriate accordion from the above array
+
+### unbind()
 
 Removes any tap, mouse, and other event handlers from the accordion.
 
-    $('.m-accordion').accordion('unbind');
+    accordion.unbind();
 
-### .accordion('bind')
+### bind()
 
 Restores the tap, mouse, and other event handlers for the accordion.
 
-    $('.m-accordion').accordion('bind');
+    accordion.bind();
 
-### .accordion('destroy')
+### destroy()
 
 Unbinds the events from the accordion, and removes it from the DOM.
 
-    $('.m-accordion').accordion('destroy');
+    accordion.destroy(); // destroys the DOM element and the jQuery bindings
+    accordion = null; // destroys the Mobify accordion object as well
+
+### open($item)
+
+Open the selected accordion item
+
+    accordion.open($(".m-item").eq(2));
+
+### close($item)
+    
+Close the selected accordion item
+
+  accordion.close($("#some-item"));
+
+### recalculateItemHeight($item)
+
+Recalculate the heights of accordion item elements. This is used when the heights of the content have changed after creation of the accordion.
+
+    accordion.recalculateItemHeight($(".m-item"));
+
+## Class names
+
+Set the class names for the different elements, if deviating from the defaults.
+  
+  $(".m-accordion").accordion({
+    closedClass: 'm-closed',
+    openedClass: 'm-opened',
+    activeClass: 'm-active',
+    contentClass: 'm-content',
+    innerContentClass: 'm-inner-content',
+    headerClass: 'm-header',
+    itemClass: 'm-item'
+  });
+
+## Event hooks
+
+### onTransitionDone: functionName
+
+Execute this function every time the selected accordion item is opened or closed.
+
+    $(".m-accordion").accordion({
+        onTransitionDone: function() { console.log("Animation done"); }
+    });
+
+### onOpened: functionName
+
+Execute this function every time the selected accordion item is opened.
+
+    $(".m-accordion").accordion({
+        onOpened: function() { console.log("Opened"); }
+    });
+
+### onClosed: functionName
+
+Execute this function every time an accordion item is closed
+    
+    $(".m-accordion").accordion({
+        onClosed: function() { console.log("Closed"); }
+    });
 
 ## Browser Compatibility
 
