@@ -259,7 +259,8 @@ Mobify.UI.Carousel = (function($, Utils) {
             , $inner = this.$inner
             , opts = this.options
             , lockLeft = false
-            , lockRight = false;
+            , lockRight = false
+            , windowWidth = $(window).width();
 
         function start(e) {
             if (!has.touch) e.preventDefault();
@@ -362,8 +363,12 @@ Mobify.UI.Carousel = (function($, Utils) {
             // Disable animation for now to avoid seeing 
             // the carousel sliding, as it updates its position.
             // Animation will be enabled automatically when you're swiping.
+            // Don't update Carousel on window height change
+            if(windowWidth == $(window).width())
+                return;
+
             self._disableAnimation();
-            
+            windowWidth = $(window).width();
             self.update();
         });
 
