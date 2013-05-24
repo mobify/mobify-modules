@@ -141,7 +141,7 @@ Mobify.UI.Zoomable = (function() {
 
         this.$element.trigger('closing.zoomable');
 
-        this.$canvas.detach();
+        this.$canvas.remove();
         this.$stage.removeClass(this._getClass('zooming'));
 
         if (this.options.global) {
