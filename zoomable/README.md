@@ -11,7 +11,7 @@
     <!-- include zoomable.js -->
     <script src="zoomable.js"></script>
     <!-- construct the zoomable -->
-    <script>$('a.m-zoomable').zoomable()</script>
+    <script>$('a.zoomable').zoomable()</script>
 
 The element passed to `.zoomable()` should reference a high resolution
 image.
