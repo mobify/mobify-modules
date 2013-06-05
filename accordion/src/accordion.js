@@ -145,7 +145,7 @@ Mobify.UI.Accordion = (function($, Utils) {
         function recalculateHeight() {
             // recalculate proper height
             var height = 0;
-            $('.' + itemClass, this.$element).each(function(index) {
+            $('.' + itemClass, $element).each(function(index) {
                 var $item = $(this);
                 height += $item.height();
             });
