@@ -18,7 +18,8 @@ Mobify.UI = Mobify.UI ? Mobify.$.extend(Mobify.UI, { classPrefix: 'm-' }) : { cl
 */
 Mobify.UI.Utils = (function($) {
     var exports = {}
-        , has = $.support;
+        , has = $.support
+        , ua = navigator.userAgent;
 
     /**
         Events (either touch or mouse)
@@ -59,7 +60,11 @@ Mobify.UI.Utils = (function($) {
 
     $.extend(has, {
         'transform': !! (exports.getProperty('Transform'))
-      , 'transform3d': !! (window.WebKitCSSMatrix && 'm11' in new WebKitCSSMatrix()) 
+
+        // Usage of transform3d on *android* would cause problems for input fields:
+        // - https://coderwall.com/p/d5lmba
+        // - http://static.trygve-lie.com/bugs/android_input/
+      , 'transform3d': !! (window.WebKitCSSMatrix && 'm11' in new WebKitCSSMatrix() && !/android\s+[1-2]/i.test(ua)) 
     });
 
     // translateX(element, delta)
