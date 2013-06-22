@@ -27,7 +27,9 @@ To get the static site up and running, switch to the Github Pages branch and ins
 
 Then run the following command in the root folder:
 
-    jekyll server --watch --port 4001
+    jekyll server --watch --safe --port 4001
+
+(using --safe flag because that's how it is built on Github)
 
 The browser to http://localhost:4001/ to see the static page for the modules
 
