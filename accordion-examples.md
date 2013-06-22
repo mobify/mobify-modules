@@ -6,8 +6,6 @@ description:
     including the sample code snippets.
 ---
 
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/accordion/accordion.css">
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/accordion/accordion-style.css">
 <style>
 
 .m-arrows .m-inner-content {
@@ -433,7 +431,6 @@ The basic accordion control with CSS arrows to indicate open headers.
     </ul>
 
 
-<script src="{{ site.baseurl }}static/modules/accordion/accordion.js"></script>
 <script>
     $(function() { $('.m-accordion').accordion(); });
 </script>

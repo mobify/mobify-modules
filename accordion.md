@@ -6,9 +6,6 @@ description:
     two-level navigation systems.
 ---
 
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/accordion/accordion.css">
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/accordion/accordion-style.css">
-
 # Accordion
 
 An expanding accordion menu for two-level nav systems.
@@ -51,18 +48,25 @@ An expanding accordion menu for two-level nav systems.
 </ul>
 
 <div class="btn-container actions">
-	<a href="{{ site.baseurl }}static/downloads/accordion.zip" class="btn btn-primary">Download Accordion</a>
+	<a href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.zip" class="btn btn-primary">Download Accordion</a>
 	<ul>
         <li><a href="{{ site.baseurl }}modules/accordion-examples">See more examples</a></li>
 	    <li><a href="http://jsfiddle.net/fPQma/3/">View it on jsFiddle</a></li>
     </ul>
+    <p>This module is also hosted on Mobify's CDN:</p>
+    <p><u>CSS</u></p>
+    <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.css">
+&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion-style.min.css"></code></pre>
+    <p><u>JavaScript</u></p>
+    <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.js"></code></pre>
 </div>
 
 
 ## Usage
 
     <!-- include accordion.css -->
-    <link rel="stylesheet" href="accordion.css">
+    <link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.css">
+    <link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion-style.min.css">
 
     <!-- the markup -->
 	<ul class="m-accordion">
@@ -105,9 +109,9 @@ An expanding accordion menu for two-level nav systems.
 	</ul>
 
     <!-- include zepto.js or jquery.js -->
-    <script src="zepto.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <!-- include accordion.js -->
-    <script src="accordion.js"></script>
+    <script src="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.js"></script>
     <!-- construct the accordion -->
     <script>$('.m-accordion').accordion()</script>
 
@@ -158,7 +162,6 @@ Unbinds the events from the accordion, and removes it from the DOM.
 | Firefox (Android) | 1.0+    | Supported                  |
 | Windows Phone     | 7.5     | Degraded. No transitions.  |
 
-<script src="{{ site.baseurl }}static/modules/accordion/accordion.js"></script>
 <script>
     $(function() { $('.m-accordion').accordion(); });
 </script>

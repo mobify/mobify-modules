@@ -5,9 +5,6 @@ description:
     Learn about Mobify.js Carousel module, a configurable rotating content
     carousel for displaying images or arbitrary information on mobile websites.
 ---
-
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/carousel/carousel.css">
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/carousel/carousel-style.css">
 <style>
 
 /* styling for this page */
@@ -49,15 +46,21 @@ arbitrary content.
 </div>
 
 <div class="btn-container">
-	<a href="{{ site.baseurl }}static/downloads/carousel.zip" class="btn btn-primary">Download Carousel</a>
+	<a href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.zip" class="btn btn-primary">Download Carousel</a>
 	<a href="{{ site.baseurl }}modules/carousel-examples" class="see-examples">See more examples</a>
+    <p>This module is also hosted on Mobify's CDN:</p>
+    <p><u>CSS</u></p>
+    <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.css">
+&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel-style.min.css"></code></pre>
+    <p><u>JavaScript</u></p>
+    <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.js"></code></pre>
 </div>
 
 ## Usage
 
     <!-- include carousel.css -->
-    <link rel="stylesheet" href="carousel.css">
-    <link rel="stylesheet" href="carousel-style.css">
+    <link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.css">
+    <link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel-style.min.css">
 
     <!-- the viewport -->
     <div class="m-carousel m-fluid m-carousel-photos">
@@ -85,9 +88,9 @@ arbitrary content.
     </div>
 
     <!-- include zepto.js or jquery.js -->
-    <script src="zepto.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <!-- include carousel.js -->
-    <script src="carousel.js"></script>
+    <script src="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.js"></script>
     <!-- construct the carousel -->
     <script>$('.m-carousel').carousel()</script>
 
@@ -236,5 +239,6 @@ The following desktop browsers have degraded support:
 
 -->
 
-<script src="{{ site.baseurl }}static/modules/carousel/carousel.js"></script>
-<script>$('.m-carousel').carousel();</script>
+<script>
+    $(function() { $('.m-carousel').carousel(); });
+</script>

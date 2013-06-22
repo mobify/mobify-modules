@@ -5,9 +5,6 @@ description:
     See examples of the Mobify.js rotating content carousel module in action,
     including the sample code snippets.
 ---
-
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/carousel/carousel.css">
-<link rel="stylesheet" href="{{ site.baseurl }}static/modules/carousel/carousel-style.css">
 <style>
 
 /* styling for this page */
@@ -460,5 +457,6 @@ These elements are automatically sized by the <code>.m-fluid</code> class to be 
     &lt;/div&gt;
   &lt;/div&gt;</code></pre>
 
-<script src="{{ site.baseurl }}static/modules/carousel/carousel.js"></script>
-<script>$('.m-carousel').carousel();</script>
+<script>
+    $(function() { $('.m-carousel').carousel(); });
+</script>
