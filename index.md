@@ -8,8 +8,7 @@ description:
 ---
 A library of customizable user interface modules built for mobile-first
 and tested across a wide range of devices, while also providing a seamless
-desktop experience. They can be used standalone or with a Mobify.js-powered
-site.
+desktop experience. 
 
 All modules require either the [Zepto](http://zeptojs.com/) or
 [jQuery](http://jquery.com/) JavaScript libraries.
