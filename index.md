@@ -14,4 +14,7 @@ All modules require either the [Zepto](http://zeptojs.com/) or
 [jQuery](http://jquery.com/) JavaScript libraries.
 
 All modules available on [GitHub](https://github.com/mobify/mobify-modules)
-and published under an [MIT license]({{ site.baseurl }}/license/).
+and published under an [MIT license](https://github.com/mobify/mobify-modules/blob/master/LICENSE).
+
+If you find any issues with the modules, feel free to
+[file an issue](https://github.com/mobify/mobify-modules/issues), or submit a pull request!

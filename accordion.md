@@ -58,7 +58,7 @@ An expanding accordion menu for two-level nav systems.
     <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.css">
 &lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion-style.min.css"></code></pre>
     <p><u>JavaScript</u></p>
-    <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.js"></code></pre>
+    <pre><code class="xml">&lt;script src="http://cdn.mobify.com/modules/accordion/0.2.0/accordion.min.js"></script></code></pre>
 </div>
 
 

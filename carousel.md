@@ -53,7 +53,7 @@ arbitrary content.
     <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.css">
 &lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel-style.min.css"></code></pre>
     <p><u>JavaScript</u></p>
-    <pre><code class="xml">&lt;link rel="stylesheet" href="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.js"></code></pre>
+    <pre><code class="xml">&lt;script src="http://cdn.mobify.com/modules/carousel/0.2.2/carousel.min.js"></script></code></pre>
 </div>
 
 ## Usage
