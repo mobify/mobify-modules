@@ -11,11 +11,12 @@ All modules require either the [Zepto](http://zeptojs.com/) or
 All modules available on [GitHub](https://github.com/mobify/mobify-modules)
 and published under an [MIT license](http://www.mobify.com/mobifyjs/license/).
 
-To develop each module, look at the READMEs for each individual module subfolder.
+For more information about developing a particular module, take a look 
+at the README.md for that module.
 
 ## Github Page for Mobify Modules
 
-The Mobile Modules page runs on Jekyll. Using Jekyll, it is very simply to
+The Mobify Modules page runs on Jekyll. Using Jekyll, it is very simply to
 use Github Pages to create a landing page for your code.
 
 ### Installation
@@ -31,7 +32,7 @@ Then run the following command in the root folder:
 
 (using --safe flag because that's how it is built on Github)
 
-The browser to http://localhost:4001/ to see the static page for the modules
+Navigate your browser over to http://localhost:4001/ to see the static page for the modules
 
 ### Deployment
 
