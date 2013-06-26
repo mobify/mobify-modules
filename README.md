@@ -21,10 +21,12 @@ use Github Pages to create a landing page for your code.
 
 ### Installation
 
-To get the static site up and running, switch to the Github Pages branch and install Jekyll:
+To get the static site up and running, switch to the Github Pages branch, install Jekyll,
+and install rdiscount (markdown processor):
 
     git checkout gh-pages
     sudo gem install jekyll
+    sudo gem install rdiscount
 
 Then run the following command in the root folder:
 
