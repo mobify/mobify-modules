@@ -467,7 +467,7 @@ Mobify.UI.Carousel = (function($, Utils) {
 
         // Handle different calling conventions
         if (typeof action == 'object') {
-            initOptions = $(initOptions, action);
+            $.extend(initOptions, action, true);
             options = null;
             action = null;
         }
