@@ -84,8 +84,7 @@ Mobify.UI.Utils = (function($) {
 
     $.extend(exports.events, {
         'transitionend': whichTransitionEvent()
-     });
-
+    });
 
     return exports;
 
@@ -97,74 +96,118 @@ Mobify.UI.Accordion = (function($, Utils) {
     var has = $.support;
 
     // Constructor
-    var Accordion = function(element) {
-        this.element = element;
+    var Accordion = function(element, options) {
+
+        // Accordion settings
+        this.settings = $.extend({
+            dragRadius: 10
+            , closedClass: 'm-closed'
+            , openedClass: 'm-opened'
+            , activeClass: 'm-active'
+            , contentClass: 'm-content'
+            , innerContentClass: 'm-inner-content'
+            , headerClass: 'm-header'
+            , itemClass: 'm-item'
+            , onTransitionDone: null
+            , onOpened: null
+            , onClosed: null
+        }, options || {});
+
         this.$element = $(element);
-        this.dragRadius = 10;
-        this.bind();
+        
+        $.extend(this, this.bind());
+        return this;
     };
 
     Accordion.prototype.bind = function() {
         var $element = this.$element
             , xy
             , dxy
-            , dragRadius = this.dragRadius;
+            , settings = this.settings
+            , dragRadius = settings.dragRadius
+            , openedClass = settings.openedClass
+            , closedClass = settings.closedClass
+            , activeClass = settings.activeClass
+            , contentClass = settings.contentClass
+            , headerClass = settings.headerClass
+            , itemClass = settings.itemClass;
 
         function endTransition(){
             // transition attached to .content elements, use parent to grab .item
             var $item = $(this).parent();
-
             // if the transition is ending
-            if ($item.hasClass('m-closed')) $(this).parent().removeClass('m-active');
+            if ($item.hasClass(closedClass)) $(this).parent().removeClass(activeClass);
+            // Execute any callbacks that were passed
+            executeCallbacks($item.hasClass(closedClass) ? 'closing' : 'opening');
+            recalculateHeight();
+        };
 
+        function recalculateHeight() {
             // recalculate proper height
             var height = 0;
-            $('.m-item', $element).each(function(index) {
+            $('.' + itemClass, $element).each(function(index) {
                 var $item = $(this);
                 height += $item.height();
             });
-            $element.css('min-height', height + 'px'); 
-        };
+            $element.css('min-height', height + 'px');         
+        }
 
-        function close($item) {
-            // toggle opened and closed classes
-            $item.removeClass('m-opened');
-            $item.addClass('m-closed');
-
-            // toggle active class on close only if there is no transition support
-            if(!Utils.events.transitionend) $item.removeClass('m-active');
-
-            // set max-height to 0 upon close
-            $item.find('.m-content').css('max-height', 0)
-        };
-        
-        function open($item) {
-            var $content = $item.find('.m-content');
-            $item.addClass('m-active');
-            $item.removeClass('m-closed');
-            $item.addClass('m-opened')
-
+        // Calculate height of individual accordion item (useful for dynamic item creation)
+        function recalculateItemHeight($item) {
+            var $content = $item.find('.' + contentClass);
             // determine which height function to use (outerHeight not supported by zepto)
             var contentChildren = $content.children();
             var contentHeight = ('outerHeight' in contentChildren) ? contentChildren['outerHeight']() : contentChildren['height']();
             $content.css('max-height', contentHeight * 1.5 +'px'); 
-
             // if transitions are supported, minimize browser reflow by adding the height
             // of the to-be expanded content element to the height of the entire accordion
             if (Utils.events.transitionend) {
                 $element.css('min-height', $element.height() + contentHeight + 'px');
             }
-        };
+            recalculateHeight();
+        }
+
+        // Execute any callback functions that are passed to open/close
+        function executeCallbacks(type) {
+            if(type === 'opening' && typeof settings['onOpened'] === "function") { 
+                settings['onOpened'].apply(this, arguments);
+            } 
+            if(type === 'closing' && typeof settings['onClosed'] === "function") { 
+                settings['onClosed'].apply(this, arguments);
+            } 
+            if(typeof settings['onTransitionDone'] === "function") {
+                settings['onTransitionDone'].apply(this, arguments);
+            }
+        }
+
+        function close($item) {
+            if($item.hasClass(closedClass)) { executeCallbacks('closing'); }
+            // toggle opened and closed classes
+            $item.removeClass(openedClass);
+            $item.addClass(closedClass);
+            // toggle active class on close only if there is no transition support
+            if(!Utils.events.transitionend) $item.removeClass(activeClass);
+            // set max-height to 0 upon close
+            $item.find('.' + contentClass).css('max-height', 0);
+        }
+        
+        function open($item) {
+            if($item.hasClass(openedClass)) { executeCallbacks('opening'); }
+            $item.addClass(activeClass);
+            $item.removeClass(closedClass);
+            $item.addClass(openedClass)
+            recalculateItemHeight($item);
+        }
 
         function down(e) {
             // get initial position on mouse/touch start
             xy = Utils.getCursorPosition(e);
-        };
+        }
 
         function move(e) {
             // update position upon move
             dxy = Utils.getCursorPosition(e);
-        };
+        }
 
         function up(e) {
             // if there is dragging, do not close/open accordion
@@ -177,36 +220,46 @@ Mobify.UI.Accordion = (function($, Utils) {
 
             // close or open item depending on active class
             var $item = $(this).parent();
-            if ($item.hasClass('m-active')) {
+            if ($item.hasClass(activeClass)) {
                 close($item);
             }
             else {
                 open($item);
             }
-        };
+        }
 
         function click(e) {
             e.preventDefault();
-        };
+        }
 
 
-        // Auto-open items that are hash linked
+        // Auto-open items that are hash linked or have openedClass class
         var hash = location.hash;
-        var $hashitem = $element.find('.m-header a[href="'+hash+'"]');
-  
+        var $hashitem = $element.find('.' + headerClass + ' a[href="'+hash+'"]');
+
         if ($hashitem.length) {
             open($hashitem.parent());
+        } else if ($element.find('.' + openedClass).length) {
+            open($element.find('.' + openedClass));
         }
 
-        // bind events
-        $element.find('.m-header')
-            .on(Utils.events.down, down)
-            .on(Utils.events.move, move)
-            .on(Utils.events.up, up)
-            .on('click', click);
+        var headerSelector = '.' + headerClass;
+        $element
+            .on(Utils.events.down, headerSelector, down)
+            .on(Utils.events.move, headerSelector, move)
+            .on(Utils.events.up, headerSelector, up)
+            .on('click', headerSelector, click);
         if (Utils.events.transitionend) {
-            $element.find('.m-content').on(Utils.events.transitionend, endTransition);
+            $element.on(Utils.events.transitionend, '.' + contentClass, endTransition);
         }
+
+        // API calls
+        return {
+            'settings': settings
+            , 'open': open
+            , 'close': close
+            , 'recalculateItemHeight': recalculateItemHeight
+        };
         
     };
                  
@@ -217,34 +270,23 @@ Mobify.UI.Accordion = (function($, Utils) {
     Accordion.prototype.destroy = function() {
         this.unbind();
         this.$element.remove();
-        this.$element = null;
     }
-    
+
     return Accordion;
     
 })(Mobify.$, Mobify.UI.Utils);
     
 (function($) {
-    $.fn.accordion = function(action) {
-        this.each(function () {
+    $.fn.accordion = function(options) {
+        return this.each(function (i, elem) {
             var $this = $(this)
-              , accordion = $this._accordion
+              , accordion = this.accordion;
 
             if (!accordion) {
-                accordion = new Mobify.UI.Accordion(this);
-            }   
+                accordion = new Mobify.UI.Accordion(this, options); // pass through options
+            } 
 
-            if (action) {
-                accordion[action]();
-
-                if (action === 'destroy') {
-                    accordion = null;
-                }   
-            }   
-
-            $this._accordion = accordion;
-        })  
-
-        return this;
+            this.accordion = accordion; // Provide the accordion object to callers
+        })
     };
 })(Mobify.$);
