@@ -221,6 +221,15 @@ Mobify.UI.Carousel = (function($, Utils) {
         this.animating = false;
     }
 
+    Carousel.prototype.refresh = function() {
+        /* Call when number of items has changed (e.g. with AJAX) */
+        this.$items = this.$inner.children( '.' + this._getClass('item'));
+        this.$start = this.$items.eq(0);
+        this.$sec = this.$items.eq(1);
+        this._length = this.$items.length;
+        this.update();
+    }
+
     Carousel.prototype.update = function() {
         /* We throttle calls to the real `_update` for efficiency */
         if (this._needsUpdate) {
