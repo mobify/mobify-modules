@@ -128,6 +128,7 @@ Mobify.UI.Carousel = (function($, Utils) {
             dragRadius: 10
           , moveRadius: 20
           , classPrefix: undefined
+          , preventDefault: true
           , classNames: {
                 outer: 'carousel'
               , inner: 'carousel-inner'
@@ -269,7 +270,9 @@ Mobify.UI.Carousel = (function($, Utils) {
             , windowWidth = $(window).width();
 
         function start(e) {
-            if (!has.touch) e.preventDefault();
+            if (!has.touch && self.options.preventDefault) {
+                e.preventDefault();
+            }
 
             dragging = true;
             canceled = false;
@@ -296,8 +299,9 @@ Mobify.UI.Carousel = (function($, Utils) {
 
             if (dragThresholdMet || abs(dx) > abs(dy) && (abs(dx) > dragRadius)) {
                 dragThresholdMet = true;
-                e.preventDefault();
-                
+                if (self.options.preventDefault) {
+                    e.preventDefault();
+                }
                 if (lockLeft && (dx < 0)) {
                     dx = dx * (-dragLimit)/(dx - dragLimit);
                 } else if (lockRight && (dx > 0)) {
@@ -335,7 +339,9 @@ Mobify.UI.Carousel = (function($, Utils) {
         }
 
         function click(e) {
-            if (dragThresholdMet) e.preventDefault();
+            if (dragThresholdMet && self.options.preventDefault) {
+                e.preventDefault();
+            }
         }
 
         $inner
@@ -346,7 +352,9 @@ Mobify.UI.Carousel = (function($, Utils) {
             .on('mouseout.carousel', end);
 
         $element.on('click', '[data-slide]', function(e){
-            e.preventDefault();
+            if (self.options.preventDefault) {
+                e.preventDefault();
+            }
             var action = $(this).attr('data-slide')
               , index = parseInt(action, 10);
 
