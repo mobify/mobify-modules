@@ -13,6 +13,10 @@ description:
 }
 </style>
 
+<script>
+    window.location = "//mobify.github.io/scooch/"
+</script>
+
 # Carousel
 
 A configurable rotating content carousel for displaying images or

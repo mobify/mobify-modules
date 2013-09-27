@@ -6,6 +6,10 @@ description:
     two-level navigation systems.
 ---
 
+<script>
+    window.location = "//mobify.github.io/bellows/"
+</script>
+
 # Accordion
 
 An expanding accordion menu for two-level nav systems.

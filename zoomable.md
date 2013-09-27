@@ -3,6 +3,10 @@ layout: modules
 title: Mobify.js Zoomable Module
 ---
 
+<script>
+    window.location = "//mobify.github.io/magnifik/"
+</script>
+
 <style>
 .zoomable-notice {
     position: absolute; 
