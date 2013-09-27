@@ -6,6 +6,11 @@ description:
     across a wide range of devices.
 
 ---
+
+<script>
+    window.location = "//mobify.github.io/"
+</script>
+
 A library of customizable user interface modules built for mobile-first
 and tested across a wide range of devices, while also providing a seamless
 desktop experience. 
